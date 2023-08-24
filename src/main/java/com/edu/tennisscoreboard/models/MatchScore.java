@@ -42,11 +42,11 @@ public class MatchScore {
                 ScorePlayer1++;
             else if(id == IdPlayer2)
                 ScorePlayer2++;
-            if(Math.abs(ScorePlayer1 - ScorePlayer2) > 2 && ScorePlayer1 >= 7) {
+            if(Math.abs(ScorePlayer1 - ScorePlayer2) == 2 && ScorePlayer1 >= 7) {
                 winGamePlayer1++;
                 ScorePlayer1 = 0;
                 ScorePlayer2 = 0;
-            } else if(Math.abs(ScorePlayer1 - ScorePlayer2) > 2 && ScorePlayer2 >= 7) {
+            } else if(Math.abs(ScorePlayer1 - ScorePlayer2) == 2 && ScorePlayer2 >= 7) {
                 winGamePlayer2++;
                 ScorePlayer1 = 0;
                 ScorePlayer2 = 0;

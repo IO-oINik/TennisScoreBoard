@@ -43,7 +43,7 @@
             <tr><th scope="row">Игроки</th><td th:text="${match.getPlayer1().getName()}">Антон</td><td th:text="${match.getPlayer2().getName()}">Дима</td></tr>
             <tr><th scope="row">Сеты</th><td th:text="${match.getWinSetPlayer1()}">1</td><td th:text="${match.getWinSetPlayer2()}">2</td></tr>
             <tr><th scope="row">Геймы</th><td th:text="${match.getWinGamePlayer1()}">3</td><td th:text="${match.getWinGamePlayer2()}">1</td></tr>
-            <tr><th scope="row">Счёт</th><td th:text="${match.getScorePlayer1()}">15</td><td th:text="${match.getScorePlayer2()}">30</td></tr>
+            <tr><th scope="row">Счёт</th><td th:text="${match.getScorePlayer1() % 100}">15</td><td th:text="${match.getScorePlayer2() % 100}">30</td></tr>
             <tr><th scope="row">Текущее очко</th>
               <td><input type="radio" required="required" name="id_winner" id="1" th:value="${match.getIdPlayer1()}"></td>
               <td><input type="radio" required="required" name="id_winner" id="2" th:value="${match.getIdPlayer2()}"></td>
