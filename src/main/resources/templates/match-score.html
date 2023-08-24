@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Текущий матч</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</head>
+<header>
+  <!-- Фиксированная навигационная панель -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" th:href="@{/}">Главная</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Переключить навигацию">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" th:href="@{/new-match}">Новый матч</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/matches}">Завершённые матчи</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+<body>
+  <div class="container w-50">
+    <br/>
+    <form method="post" th:action="@{/match-score?uuid={uuid}(uuid=${uuid})}">
+    <div class="mt-5">
+      <div class="row mt-2">
+        <div class="col border w-50 bg-secondary border-black rounded">
+          <table class="table table-bordered table-dark table-striped">
+            <caption class="caption-top" th:text="'Матч#' + ${uuid}">Матч#123</caption>
+            <thead>
+            <th colspan="3" class="text-center"><h2>Матч</h2><span class="text-primary fs-6" th:if="${match.getWinGamePlayer1() == 6 && match.getWinGamePlayer2() == 6}">Тай-брейк</span></th>
+            </thead>
+            <tbody>
+            <tr><th scope="row">Игроки</th><td th:text="${match.getPlayer1().getName()}">Антон</td><td th:text="${match.getPlayer2().getName()}">Дима</td></tr>
+            <tr><th scope="row">Сеты</th><td th:text="${match.getWinSetPlayer1()}">1</td><td th:text="${match.getWinSetPlayer2()}">2</td></tr>
+            <tr><th scope="row">Геймы</th><td th:text="${match.getWinGamePlayer1()}">3</td><td th:text="${match.getWinGamePlayer2()}">1</td></tr>
+            <tr><th scope="row">Счёт</th><td th:text="${match.getScorePlayer1()}">15</td><td th:text="${match.getScorePlayer2()}">30</td></tr>
+            <tr><th scope="row">Текущее очко</th>
+              <td><input type="radio" required="required" name="id_winner" id="1" th:value="${match.getIdPlayer1()}"></td>
+              <td><input type="radio" required="required" name="id_winner" id="2" th:value="${match.getIdPlayer2()}"></td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="text-center">
+          <button type="submit" class="btn btn-dark mb-3">Текущее очко</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Матчи</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</head>
+
+<header>
+    <!-- Фиксированная навигационная панель -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/}">Главная</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Переключить навигацию">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/new-match}">Новый матч</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/matches}">Завершённые матчи</a>
+                    </li>
+                </ul>
+                <form method="get" class="d-flex" th:action="@{/matches}">
+                    <input class="form-control me-2" type="search" placeholder="Имя игрока" aria-label="Поиск" name="filter_by_player_name">
+                    <button class="btn btn-outline-success" type="submit">Поиск</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<body>
+<div class="container w-50 text-center">
+    <br/>
+    <h1 class="mt-5">Матчи</h1>
+    <div th:each="match : ${matches}">
+    <div class="row mt-2">
+    <div class="col border w-50 bg-secondary border-black rounded">
+        <table class="table table-bordered table-dark table-striped">
+            <caption class="caption-top" th:text="'Матч#' + ${match.getId()}">Матч#123</caption>
+            <thead><th scope="col" class="text-center">Игрок 1</th><th scope="col" class="text-center">Игрок 2</th></thead>
+            <tr><td class="text-center" th:text="${match.getPlayer1().getName()}">Никита</td><td class="text-center" th:text="${match.getPlayer2().getName()}">Олег</td></tr>
+            <tr><th class="text-center" colspan="2">Победитель</th></tr>
+            <tr><td class="text-center" colspan="2" th:text="${match.getWinner().getName()}">Никита</td></tr>
+        </table>
+    </div>
+    </div>
+    <br/>
+    </div>
+</div>
+</body>
+</html>
